@@ -1,0 +1,9 @@
+{
+  "name": "fspt33-dom",
+  "version": "1.0.0",
+  "description": "Repository to record any classroom code for DOM in JavaScript.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
