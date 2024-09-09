@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+}
+
+.banner {
+  text-align: center;
+  background-color: #264653;
+  padding: 40px 0px;
+  color: #fff;
+}
+
+.title {
+  margin: 0;
+  font-size: 40px;
+  padding: 12px;
+}
+
+.sub-title {
+  margin: 0;
+  font-size: 30px;
+  padding: 12px;
+}
+
+.btn {
+  background-color: #e76f51;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+.btn:hover {
+  background-color: #f4a261;
+  cursor: pointer;
+  color: #264653;
+}
+
+.alert {
+  background-color: #e9c46a;
+  text-align: center;
+  padding: 24px;
+  margin: 24px;
+}
+
+.form {
+  text-align: center;
+}
+
+.form-input {
+  padding: 8px 16px;
+  min-width: 200px;
+}
+
+.form-control {
+  margin: 16px 0px;
+}
