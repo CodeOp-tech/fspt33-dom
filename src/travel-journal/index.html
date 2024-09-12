@@ -13,11 +13,42 @@
     <title>Travel Journal</title>
   </head>
   <body>
-    <header class="header text-center py-5">
+    <header class="header text-center py-5 mb-5">
       <h1 class="my-3">Travel Journal</h1>
       <h2 class="my-3">Live your dreams!!</h2>
     </header>
-    <main class="main">Main content goes here</main>
+    <main class="main container">
+      <section class="border p-3 text-center form-section">
+        <h3>Add Destination Form</h3>
+        <form id="destination-form">
+          <div class="mb-3">
+            <input
+              placeholder="Enter destination"
+              class="form-control"
+              id="destination"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              placeholder="Enter image url"
+              class="form-control"
+              id="imageUrl"
+            />
+          </div>
+          <div class="mb-3">
+            <textarea
+              placeholder="Enter description"
+              class="form-control"
+              id="description"
+              rows="3"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </section>
+      <section>Cards go here</section>
+      <section>Result goes here</section>
+    </main>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
