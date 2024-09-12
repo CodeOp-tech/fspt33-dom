@@ -1,9 +1,6 @@
-body {
-  margin: 0;
-}
-
 .header {
-  border: 1px solid black;
+  background-color: #223843;
+  color: #eff1f3;
 }
 
 .main {
