@@ -1,5 +1,27 @@
 // define an array to store destinations
-const destinations = [];
+let destinations = [
+  {
+    id: uuidv4(),
+    destination: "Title 1",
+    imageUrl:
+      "https://plus.unsplash.com/premium_photo-1661964303354-f0496d6d6e0b?q=80&w=3720&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    description: "Sample 1",
+  },
+  {
+    id: uuidv4(),
+    destination: "Title 2",
+    imageUrl:
+      "https://images.unsplash.com/photo-1620993464273-0f640df30b0b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    description: "Sample 2",
+  },
+  {
+    id: uuidv4(),
+    destination: "Title 3",
+    imageUrl:
+      "https://images.unsplash.com/photo-1620993464273-0f640df30b0b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    description: "Sample 3",
+  },
+];
 
 // create alert function
 const createAlert = () => {
@@ -15,7 +37,7 @@ const createAlert = () => {
 };
 
 // create card function
-const createCard = ({ imageUrl, destination }) => {
+const createCard = ({ imageUrl, destination, id }) => {
   const cardDiv = document.createElement("div");
   cardDiv.setAttribute("class", "card destination-card m-3");
 
@@ -37,7 +59,32 @@ const createCard = ({ imageUrl, destination }) => {
   // button
   const cardButton = document.createElement("button");
   cardButton.setAttribute("class", "btn btn-outline-primary w-100");
+  cardButton.setAttribute("id", id);
   cardButton.textContent = "View";
+
+  const handleClick = (event) => {
+    const id = event.target.id;
+
+    const result = destinations.find((destination) => {
+      return destination.id === id;
+    });
+
+    // get the id of the card I clicked on
+    // find the destination you clicked on
+    /**
+     * {
+     *    id: "8a1eba00-b8cc-43f0-95fa-d4f4a7fadd77"
+     *    destination: "London",
+     *    imageUrl: "https://google.com",
+     *    description: "Sample"
+     * }
+     */
+    // pass the destination to the renderResult function
+    renderResult(result);
+  };
+
+  // add click event listener here
+  cardButton.addEventListener("click", handleClick);
 
   cardBody.append(cardTitle, cardButton);
   cardDiv.append(cardImg, cardBody);
@@ -46,7 +93,7 @@ const createCard = ({ imageUrl, destination }) => {
 };
 
 // create result function
-const createResultCard = ({ destination, imageUrl, description }) => {
+const createResultCard = ({ destination, imageUrl, description, id }) => {
   // card div
   const cardDiv = document.createElement("div");
   cardDiv.setAttribute("class", "card mb-3");
@@ -78,7 +125,7 @@ const createResultCard = ({ destination, imageUrl, description }) => {
   cardTitle.setAttribute("class", "card-title");
   cardTitle.textContent = destination;
 
-  // card title
+  // card text
   const cardText = document.createElement("p");
   cardText.setAttribute("class", "card-text");
   cardText.textContent = description;
@@ -86,7 +133,30 @@ const createResultCard = ({ destination, imageUrl, description }) => {
   // button
   const cardButton = document.createElement("button");
   cardButton.setAttribute("class", "btn btn-outline-danger w-25");
+  cardButton.setAttribute("id", id);
   cardButton.textContent = "Delete";
+
+  const handleClick = (event) => {
+    // get id to filter
+    const id = event.target.id;
+
+    // filter destinations
+    destinations = destinations.filter((destination) => {
+      return destination.id !== id;
+    });
+
+    // clear the result section
+    const resultSection = document.getElementById("result-section");
+    resultSection.setAttribute("class", "");
+
+    while (resultSection.lastElementChild) {
+      resultSection.lastElementChild.remove();
+    }
+
+    render();
+  };
+
+  cardButton.addEventListener("click", handleClick);
 
   cardBody.append(cardTitle, cardText, cardButton);
   cardCol2.append(cardBody);
@@ -98,16 +168,6 @@ const createResultCard = ({ destination, imageUrl, description }) => {
   cardDiv.append(cardRow);
 
   return cardDiv;
-};
-
-// render the result component
-const renderResult = (destination) => {
-  // create the result card
-  const resultCard = createResultCard(destination);
-
-  const resultSection = document.getElementById("result-section");
-
-  resultSection.append(resultCard);
 };
 
 // render the alert component
@@ -142,6 +202,23 @@ const renderCards = () => {
 
   // append parent div with cards to section
   document.getElementById("destinations-section").append(parentDiv);
+};
+
+// render the result component
+const renderResult = (destination) => {
+  // create the result card
+  const resultCard = createResultCard(destination);
+
+  const resultSection = document.getElementById("result-section");
+
+  // clear my section
+  while (resultSection.lastElementChild) {
+    resultSection.lastElementChild.remove();
+  }
+
+  resultSection.setAttribute("class", "border p-3 mb-3");
+
+  resultSection.append(resultCard);
 };
 
 // render the page
@@ -186,14 +263,13 @@ const handleSubmit = (event) => {
 
   // create an object
   const destinationObject = {
+    id: uuidv4(),
     destination,
     imageUrl,
     description,
   };
 
   destinations.push(destinationObject);
-
-  console.log(destinations);
 
   // clear form fields
   destinationInput.value = "";
